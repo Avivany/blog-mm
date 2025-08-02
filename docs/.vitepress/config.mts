@@ -1,4 +1,4 @@
-import { defineConfig,DefaultTheme } from 'vitepress'
+import { defineConfig,type DefaultTheme } from 'vitepress'
 // import {nav,sidebar} from './config'
 
 
@@ -27,12 +27,13 @@ const sidebar:DefaultTheme.Config['sidebar']={
 }
 
 // https://vitepress.dev/reference/site-config
+const base = "/blog-mm/"; 
 export default defineConfig({
-  base: '/blog-mm/',
+  base,
   assetsDir: 'assets',
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
-    ['link', { rel: 'alternate icon', href: '/favicon.ico', type: 'image/png', sizes: '16x16'  }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
+    ['link', { rel: 'alternate icon', href: `${base}/favicon.ico`, type: 'image/png', sizes: '16x16'  }],
     ['meta', { name: 'author', content:'猫🐱' }]
   ],
   title: "猫猫の个站",
