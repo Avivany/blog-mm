@@ -17,6 +17,7 @@ hero:
       text: API Examples
       link: /api-examples
 
+      
 features:
   - icon: ⚡️
     title: 这里是功能区 1
@@ -27,5 +28,7 @@ features:
   - icon: 🛠️
     title: 这里是功能区 3
     details: 这里是功能区 3 详情信息
+  - icon: 🛠️
+    title: 这里是功能区 4
+    details: 这里是功能区 4 详情信息
 ---
-

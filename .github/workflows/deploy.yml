@@ -57,6 +57,8 @@ jobs:
         run: |
           echo "构建目录内容："
           ls -la docs/.vitepress/dist  # 确认构建产物是否存在
+          echo "检查样式文件："
+          ls -la docs/.vitepress/dist/assets  # 确认样式文件是否存在
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
