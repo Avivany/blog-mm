@@ -28,6 +28,8 @@ const sidebar:DefaultTheme.Config['sidebar']={
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/blog-mm/',
+  assetsDir: 'assets',
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
     ['link', { rel: 'alternate icon', href: '/favicon.ico', type: 'image/png', sizes: '16x16'  }],
