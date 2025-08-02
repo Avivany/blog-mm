@@ -2,7 +2,8 @@
   "devDependencies": {
     "@mdit-vue/shared": "^2.1.4",
     "less": "^4.4.0",
-    "vitepress": "^1.6.3"
+    "vitepress": "^1.6.3",
+    "vite": "^5.0.0"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
