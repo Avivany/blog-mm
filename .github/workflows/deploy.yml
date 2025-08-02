@@ -26,7 +26,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Check script existence
         run: |
@@ -37,7 +37,7 @@ jobs:
           fi
 
       - name: Build VitePress site
-        run: npm run docs:build  # 使用自定义的构建命令
+        run: pnpm run docs:build  # 使用自定义的构建命令
 
       - name: Verify build output
         run: |
