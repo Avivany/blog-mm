@@ -1,97 +1,52 @@
-name: Deploy Pages
+name: Deploy VitePress Site
 
-# 触发条件，push到main分支或者pull request到main分支
+# 触发条件：推送到 main 分支时触发
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [main]  
 
-  # 支持手动在工作流上触发
+# 支持手动在工作流上触发
   workflow_dispatch:
-
-# 设置时区
-env:
-  TZ: Asia/Shanghai
-
-# 权限设置
-permissions:
-  # 允许读取仓库内容的权限。
-  contents: read
-  # 允许写入 GitHub Pages 的权限。
-  pages: write
-  # 允许写入 id-token 的权限。
-  id-token: write
-
-# 并发控制配置
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
-# 定义执行任务
+  
 jobs:
-  # 构建任务
-  build:
-
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    # node v20 运行
-    strategy:
-      matrix:
-        node-version: [20]
-
     steps:
-      # 拉取代码
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
         with:
-          # 保留 Git 信息
-          fetch-depth: 0
+          fetch-depth: 0  # 必要，用于获取完整的Git历史
 
-      # 设置使用 Node.js 版本
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18
+          cache: 'npm'
 
-      # 使用 最新的 PNPM
-      # 你也可以指定为具体的版本
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: latest
-          # version: 9
-          run_install: false
-
-        # 安装依赖
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
 
-        # 构建项目
-      - name: Build blog project
+      - name: Check script existence
         run: |
-          echo ${{ github.workspace }}
-          pnpm build
+          # 检查是否存在 docs:build 命令
+          if ! grep -q '"docs:build":' package.json; then
+            echo "Error: 未找到 docs:build 命令"
+            exit 1
+          fi
 
-        # 资源拷贝
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./docs/.vitepress/dist
-          destination: ./_site
+      - name: Build VitePress site
+        run: npm run docs:build  # 使用自定义的构建命令
 
-        # 上传 _site 的资源，用于后续部署
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Verify build output
+        run: |
+          echo "构建目录内容："
+          ls -la docs/.vitepress/dist  # 确认构建产物是否存在
 
-  # 部署任务
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/.vitepress/dist
+          commit_message: 'docs: update site (${{ github.sha }})'
