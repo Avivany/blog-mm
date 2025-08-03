@@ -44,6 +44,7 @@ export default defineConfig({
           items:[
            {'text':'高效学习的认知心理学方法1','link':'/read/gxxxf/chapter1'},
            {'text':'高效学习的认知心理学方法2','link':'/read/gxxxf/chapter2'},
+           {'text':'高效学习的认知心理学方法3','link':'/read/gxxxf/chapter3'},
           ]
         }
       ]
