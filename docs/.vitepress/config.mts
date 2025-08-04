@@ -1,4 +1,5 @@
 import { defineConfig,type DefaultTheme } from 'vitepress'
+import moduleName from 'node:path'
 // import {nav,sidebar} from './config'
 // https://vitepress.dev/reference/site-config
 const base = "/blog-mm/"; 
@@ -55,9 +56,9 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Avivany/blog-mm' }
     ],
-    // footer: {
-    //   message: '帧里帧外，打破技术的冰冷感，传递技术里的温情与故事.',
-    //   copyright: 'Copyright © 2019-present Moi'
-    // }
+    footer: {
+      message: '帧里帧外，打破技术的冰冷感，传递技术里的温情与故事.',
+      copyright: 'Copyright © 2019-present Moi'
+    }
   }
 })

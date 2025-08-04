@@ -11,6 +11,10 @@
 @import "./vp-code.css";
 
 /***** vitepress 样式优化 ******/
+.container{
+  display: flex !important;
+  justify-content: center;
+}
 .VPFeatures {
   position: relative;
   padding: 0 24px;
@@ -45,7 +49,14 @@
 
   }
 }
-
+.VPFooter {
+  .container {
+    flex-wrap: wrap;
+    .message {
+      width: 100%;
+    }
+  }
+}
 
 /* 大屏大一点 */
 @media (min-width: 1440px) {
