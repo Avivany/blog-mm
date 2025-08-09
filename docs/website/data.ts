@@ -28,6 +28,29 @@ export const linkData:SiteData[]=[
         title: 'TinyPNG ',
         desc: '在线png、jpg图片压缩工具',
         link: 'https://tinypng.com/'
+      },{
+        icon: 'https://docsmall.com/favicon.png',
+        title: 'docsmall',
+        desc: '🚀 免费的在线图片与 PDF 处理工具',
+        link: 'https://docsmall.com/'
+      }
+      ,{
+        icon: 'https://excalidraw.com/favicon-32x32.png',
+        title: 'Excalidraw',
+        desc: 'Excalidrawk开源的免费白板绘图工具,',
+        link: 'https://excalidraw.com/'
+      }
+      ,{
+        icon: 'https://handraw.top/logo-180x180.png',
+        title: 'Handraw',
+        desc: 'Handraw 是一个基于开源工具 Excalidraw 开发的免费白板绘图工具',
+        link: 'https://handraw.top/'
+      }
+      ,{
+        icon: 'https://bit.dev/favicon.png',
+        title: 'Bit.dev',
+        desc: '它可以让我们探索数千个开源组件，并使用它们来构建项目',
+        link: 'https://bit.dev/'
       }
     ]
   },{
@@ -102,6 +125,12 @@ export const linkData:SiteData[]=[
         link: 'https://pinia.vuejs.org/zh'
       },
       {
+        icon: 'https://cn.vitest.dev/logo.svg',
+        title: 'Vitest',
+        desc: 'Vitest下一代测试框架一个原生支持 Vite 的测试框架。非常快速！',
+        link: 'https://cn.vitest.dev/'
+      },
+      {
         icon: 'https://nuxt.com.cn/icon.png',
         title: 'Nuxt.js',
         desc: '一个基于 Vue.js 的通用应用框架',
@@ -112,6 +141,12 @@ export const linkData:SiteData[]=[
         title: 'VueUse',
         desc: 'Vue Composition API 的常用工具集',
         link: 'https://vueuse.org'
+      },
+      {
+        icon: 'https://tanstack.com.cn/favicon-32x32.png',
+        title: 'TanStack',
+        desc: '为以下对象提供高质量的开源软件 Web 开发者',
+        link: 'https://tanstack.com.cn/'
       },
       {
         icon: 'https://element-plus.org/images/element-plus-logo-small.svg',
@@ -148,6 +183,21 @@ export const linkData:SiteData[]=[
         title: 'Redux',
         desc: 'Redux 是 JavaScript 应用程序的状态容器，提供可预测的状态管理',
         link: 'https://www.reduxjs.cn/'
+    },{
+        icon: 'https://zustand-demo.pmnd.rs/logo192.png',
+        title: 'Zustand',
+        desc: 'Zustand 是一个轻量级、简洁且强大的 React 状态管理库，旨在为您的 React 项目提供更简单、更灵活的状态管理方式',
+        link: 'https://zustand-demo.pmnd.rs/'
+    },{
+        icon: 'https://tanstack.com.cn/favicon-32x32.png',
+        title: 'TanStack',
+        desc: 'TanStackRouter现代且可扩展的 React 和 Solid 应用程序的路由',
+        link: 'https://tanstack.com/'
+    },{
+        icon: 'https://reactbits.dev/favicon.ico',
+        title: ' React Bits',
+        desc: 'React Bits 是一个大型的动画 React 组件集合，包含动画、组件、背景，动画创意满满，开源免费使用！',
+        link: 'https://reactbits.dev/'
     }
   ]
   },{
@@ -195,6 +245,11 @@ export const linkData:SiteData[]=[
     title: '构建工具类',
     items: [
       {
+        icon: 'https://cn.vitejs.dev/logo.svg',
+        title: 'Vite',
+        desc: 'Vite卓越的 Web 开发构建工具,赋能下一代 Web 应用的发展',
+        link: 'https://cn.vitejs.dev'
+    }, {
         icon: 'https://www.webpackjs.com/favicon.f326220248556af65f41.ico',
         title: 'Webpack',
         desc: 'webpack 是一个用于现代 JavaScript 应用程序的 静态模块打包工具',
@@ -312,6 +367,34 @@ export const linkData:SiteData[]=[
         title: 'REMIX ICON',
         desc: 'https://remixicon.com/',
         link: 'https://remixicon.com/'
+      },
+    ]
+  },{
+    title: '常JavaScriptg工具库',
+    items: [
+      {
+        icon: 'https://es-toolkit.dev/favicon-100x100.png',
+        title: 'es-toolkit',
+        desc: 'es-toolkit最先进的JavaScript工具库！',
+        link: 'https://es-toolkit.dev'
+      },
+      {
+        icon: 'https://www.lodashjs.com/img/favicon.ico',
+        title: 'lodash',
+        desc: 'lodash 一个一致性、模块化、高性能的 JavaScript 实用工具库！',
+        link: 'https://www.lodashjs.com/'
+      },
+      {
+        icon: 'https://www.dayjs.com/img/logo.png',
+        title: 'Day.js',
+        desc: 'Day.js 是一个轻量的处理时间和日期的 JavaScript 库，和 Moment.js 的 API 设计保持完全一样',
+        link: 'https://www.dayjs.com/zh-CN'
+      },
+      {
+        icon: 'https://axios-http.com/assets/logo.svg',
+        title: 'Axios',
+        desc: 'Axios 是一个基于 promise 的网络请求库，可以用于浏览器和 node.js',
+        link: 'https://axios-http.com/zh/'
       },
     ]
   }
