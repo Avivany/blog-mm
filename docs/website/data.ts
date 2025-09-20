@@ -52,6 +52,12 @@ export const linkData:SiteData[]=[
         desc: '它可以让我们探索数千个开源组件，并使用它们来构建项目',
         link: 'https://bit.dev/'
       }
+      ,{
+        icon: 'https://imgtu.com/assets/images/icons/imgtu_icon_180.webp',
+        title: 'imgTu',
+        desc: '免费图片和视频托管平台。在线上传、分享和托管您的图片和视频。',
+        link: 'https://imgtu.com/'
+      }
     ]
   },{
     title: 'JS相关文档',
@@ -195,10 +201,26 @@ export const linkData:SiteData[]=[
         link: 'https://tanstack.com/'
     },{
         icon: 'https://reactbits.dev/favicon.ico',
-        title: ' React Bits',
+        title: 'React Bits',
         desc: 'React Bits 是一个大型的动画 React 组件集合，包含动画、组件、背景，动画创意满满，开源免费使用！',
         link: 'https://reactbits.dev/'
     }
+  ]
+  },{
+    title: '常见UI库或素材库',
+    items: [
+      {
+       icon: 'https://uiverse.io/favicon-32x32.png',
+       title: 'Uiverse.io',
+       desc: '一个开源免费的 UI 组件库，由 HTML&CSS 组成，为前端开发人员提供了全面有趣的 UI 元素，只需要复制粘贴代码到 Web 或者应用里面，帮你轻松节省创作 UI 组件的时间和精力',
+       link: 'https://uiverse.io/'
+    },
+      {
+       icon: 'https://ui.aceternity.com/favicon.ico',
+       title: 'Aceternity UI',
+       desc: 'Aceternity UI 提供了一系列高质量的前端组件，允许开发者通过简单的复制粘贴操作，快速在网站中使用时尚的组件，无需关注样式和动画的实现。',
+       link: 'https://ui.aceternity.com/'
+    },
   ]
   },{
     title: 'Node相关',

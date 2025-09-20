@@ -52,6 +52,12 @@ export default defineConfig({
            {'text':'高效学习的认知心理学方法4','link':'/read/gxxxf/chapter4'},
            {'text':'高效学习的认知心理学方法5','link':'/read/gxxxf/chapter5'},
           ]
+        },{
+           text:'进阶',
+          collapsed:false,
+          items:[
+            {'text':'进阶-重塑高阶形象1','link':'/read/jj/chapter1'},
+          ]
         }
       ]
     },
