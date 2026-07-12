@@ -12,5 +12,10 @@
   },
   "dependencies": {
     "vue": "^3.5.18"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
