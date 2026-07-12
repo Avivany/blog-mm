@@ -28,9 +28,37 @@ export default defineConfig({
           {text: 'Html/CSS', link: '/webs/htmlcss/index', activeMatch: '/webs/htmlcss/'},
         ],
       },
+      {
+        text:'后端知识库',
+        items:[
+          {text: 'GO 知识库', link: '/webs/go/index', activeMatch: '/webs/go/'},
+          {text: '数据库', link: '/webs/db/index', activeMatch: '/webs/db/'},
+        ],
+      },
       {text: '阅读花园', link: '/read/index'},
     ],
     sidebar:{
+      '/webs/go':[
+         {
+            'text':'GO 知识点',
+            'items':[
+              {'text':'程序结构与函数','link':'/webs/go/go_syntax'},
+              {'text':'基础数据类型','link':'/webs/go/go_basic_types'},
+              {'text':'控制流','link':'/webs/go/go_control_flow'},
+              {'text':'复合数据类型','link':'/webs/go/go_composite'},
+              {'text':'并发编程','link':'/webs/go/go_concurrency'},
+              {'text':'错误处理','link':'/webs/go/go_error'},
+            ],
+         }
+      ],
+      '/webs/db':[
+         {
+            'text':'数据库知识点',
+            'items':[
+              {'text':'待补充','link':'/webs/db/index'},
+            ],
+         }
+      ],
       '/webs/jsdoc':[
          {
             'text':'Javascript知识点',
