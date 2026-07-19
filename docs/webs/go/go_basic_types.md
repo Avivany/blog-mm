@@ -1,6 +1,13 @@
 # 基础数据类型
 
 Go 是静态强类型语言，每个变量都绑定到特定类型。基础类型包括：布尔、数字、字符串。
+1. 布尔类型（bool）
+2. 数字类型
+  ○ 整数类型（int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64, uintptr）
+  ○ 浮点数类型（float32, float64）
+  ○ 复数类型（complex64, complex128）
+3. 字符串类型（string）
+● 其他：byte，rune，uint，uintptr；
 
 ## 一、布尔类型（bool）
 
@@ -40,6 +47,7 @@ not := !true         // false
 
 **特殊整型：**
 
+- `int` 与 `uint` 均为平台相关，32 位系统为 `int32`，64 位为 `int64`
 - `byte` 即 `uint8`，表示一个 ASCII 字符
 - `rune` 即 `int32`，表示一个 UTF-8 字符
 - `uintptr` 无符号整型，用于存放指针地址
@@ -158,7 +166,7 @@ str := string(runes)
 
 ## 四、类型转换
 
-Go **不支持隐式转换**，必须显式转换。
+Go **不支持隐式转换**，必须显式转换。注意事项：转换时要注意精度丢失和溢出
 
 ```go
 var i int = 42
@@ -217,6 +225,35 @@ var iface interface{} // nil
 type Circle struct{ radius float64 }
 var c Circle // c.radius == 0
 ```
+```go
+// 1.整数溢出
+var u8 uint8 = 255
+u8++  // 0，溢出但不报错
+
+// 使用安全运算
+import "math"
+if u8 < math.MaxUint8 {
+    u8++
+}
+
+// 2. 浮点数精度
+s := "hello"
+// s[0] = 'H'  // 错误：字符串不可变
+
+// 正确做法
+bytes := []byte(s)
+bytes[0] = 'H'
+s = string(bytes)
+
+//3. 字符串不可变性
+s := "hello"
+// s[0] = 'H'  // 错误：字符串不可变
+
+// 正确做法
+bytes := []byte(s)
+bytes[0] = 'H'
+s = string(bytes)
+```
 
 ## 七、类型选择建议
 
@@ -224,3 +261,65 @@ var c Circle // c.radius == 0
 - 需要明确大小时使用具体类型（如 `int32`）
 - 浮点数优先使用 `float64`
 - 字符处理使用 `rune` 而非 `byte`
+
+## 八、默认值
+
+● 数值：所有数值类型的零值都是0
+  ○ 整数，零值是0。byte, rune, uintptr也是整数类型，所以零值也是0。
+  ○ 浮点数，零值是0
+  ○ 复数，零值是0+0i
+● bool，零值是false
+● 字符串，零值是空串""
+● 指针：var a *int，零值是nil
+● 切片：var a []int，零值是nil
+● map：var a map[string] int，零值是nil
+● 函数：var a func(string) int，零值是nil
+● channel：var a chan int，通道channel，零值是nil
+● 接口：var a interface_type，接口interface，零值是nil
+● 结构体: var instance StructName，结构体里每个field的零值是对应field的类型的零值
+```go
+//指针：var a *int，零值是nil
+num := 100
+var a * int = &num
+
+//切片：var a []int，零值是nil
+var a []int = []int{1,2}
+list := [6]int{1,2} //size为6的数组，前面2个元素是1和2，后面的是默认值0
+
+//map：var a map[string] int，零值是nil
+dict := map[string] int{"a":1, "b":2}
+
+//函数：var a func(string) int，零值是nil
+function := func(str string) string {
+  return str
+}
+result := function("hello fans")
+fmt.Println("result=", result)
+
+channel：var a chan int，通道channel，零值是nil
+var a chan int = make(chan int)
+var b = make(chan string)
+c := make(chan bool)
+
+//接口：var a interface_type，接口interface，零值是nil
+type Animal interface {
+  speak()
+}
+type Cat struct {
+  name string
+  age int
+}
+func(cat Cat) speak() {
+  fmt.Println("dog...")
+}
+// 定义一个接口变量a
+var a Animal = Cat{"zzz", 1}
+a.speak() // miao...
+
+//结构体: var instance StructName，结构体里每个field的零值是对应field的类型的零值
+type Circle struct {
+  radius float64
+}
+var c1 Circle
+c1.radius = 10.00
+```

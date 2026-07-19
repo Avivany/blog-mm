@@ -113,6 +113,7 @@ func main() {
 ## 三、变量
 
 Go 是静态强类型语言，变量类型在编译期确定。
+需要记住的重要一点是，在 Go 中，当你声明一个变量但不使用它时，Go 会抛出错误，而不是像某些其他编程语言一样抛出警告。
 
 ### 声明方式
 
@@ -221,6 +222,14 @@ const (
     g = iota // 6，恢复计数
     h        // 7
 )
+
+// 枚举常量
+const (
+    Monday = iota  // 0
+    Tuesday        // 1
+    Wednesday      // 2
+)
+
 ```
 
 ### 数字进制表示
@@ -233,8 +242,12 @@ const (
 | 二进制 | `0b` 开头 | `0b10101` |
 
 ## 五、函数
+在 Go 中，函数允许你将一组可以从应用程序的其他部分调用的语句组合在一起。 你可以使用函数来组织代码并使其更易于阅读，而不是创建包含许多语句的程序。
+Go 中的所有可执行程序都具有此函数，因为它是程序的起点。 你的程序中只能有一个 main() 函数。 如果创建的是 Go 包，则无需编写 main() 函数。 。
+main() 函数没有任何参数，并且不返回任何内容。 但这并不意味着其不能从用户读取值，如命令行参数。 如要访问 Go 中的命令行参数，可以使用用于保存传递到程序的所有参数的 os 包 和 os.Args 变量来执行操作。
 
 ### 定义
+请注意，使用 func 关键字来定义函数，然后为其指定名称。 在命名后，指定函数的参数列表。 你可以指定零个或多个参数。 你还可以定义函数的返回类型，该函数也可以是零个或多个
 
 ```go
 func name(parameters) (results) {
@@ -243,12 +256,35 @@ func name(parameters) (results) {
 ```
 
 ```go
+package main
+
+import (
+    "os"
+    "strconv"
+)
+
+func main() {
+    sum := sum(os.Args[1], os.Args[2])
+    println("Sum:", sum)
+}
+
 func sum(number1 string, number2 string) int {
     int1, _ := strconv.Atoi(number1)
     int2, _ := strconv.Atoi(number2)
     return int1 + int2
 }
 ```
+此代码创建一个名为 sum 的函数，该函数采用两个 string 参数，并将它们强制转换为 int，然后返回求和所得的结果。 定义返回类型时，函数需要返回该类型的值。
+在 Go 中，你还可以为函数的返回值设置名称，将其当作一个变量。 例如，你可以重构如下 sum 函数：
+```go
+func sum(number1 string, number2 string) (result int) {
+    int1, _ := strconv.Atoi(number1)
+    int2, _ := strconv.Atoi(number2)
+    result = int1 + int2
+    return
+}
+```
+请注意，你现在需要将函数的结果值括在括号中。 你还可以在函数中使用该变量，并且只需在末尾添加 return 行。 Go 将返回这些返回变量的当前值。 在函数末尾编写 return 关键字非常简单方便，尤其是在有多个返回值时。 但我们不建议采用这种方法，因为它不太清楚函数返回的内容。
 
 **函数名特点：**
 
@@ -273,6 +309,7 @@ func total(nums ...int) int {
 ```
 
 ### 多返回值
+在 Go 中，函数可以返回多个值。 你可以采用类似于定义函数参数的方式来定义这些值。 换句话说，你可以指定一个类型和名称，但该名称是可选的。
 
 ```go
 func calc(n1, n2 string) (sum int, mul int) {
@@ -287,14 +324,16 @@ func main() {
     s, m := calc("3", "4")
     fmt.Println(s, m)
 
-    // 不需要的返回值用 _ 忽略
+    //Go 的另一个有趣功能是，如果不需要函数的某个返回值，可以通过将返回值分配给 _ 变量来放弃该函数。
+    //_ 变量是 Go 忽略返回值的惯用方式。 它允许程序进行编译。
+    //因此，如果只需要求和，则可以使用以下代码：
     s, _ = calc("3", "4")
 }
 ```
 
 ### 指针参数（按引用传递）
 
-Go 是**按值传递**：函数收到的是值的副本，修改不影响调用方。
+Go 是**按值传递**：函数收到的是值的副本，修改不影响调用方。(将值传递给函数时，该函数中的每个更改都不会影响调用方。 Go 是“按值传递”编程语言。 这意味着每次向函数传递值时，Go 都会使用该值并创建本地副本（内存中的新变量）。 在函数中对该变量所做的更改都不会影响你向函数发送的更改。)
 
 ```go
 func updateName(name string) {
@@ -307,8 +346,13 @@ func main() {
     fmt.Println(firstName) // 仍为 John
 }
 ```
+即使你在函数中将该名称更改为 David，输出仍为 John。 由于 updateName 函数中的更改仅会修改本地副本，因此输出不会发生变化。 Go 传递变量的值，而不是变量本身。
+如果你希望在 updateName 函数中进行的更改会影响 main 函数中的 firstName 变量，则需要使用指针。 指针 是包含另一个变量的内存地址的变量。 当你发送指向某个函数的指针时，不会传递值，而是传递地址内存。 因此，对该变量所做的每个更改都会影响调用方。
 
 如需修改调用方变量，使用指针：
+在 Go 中，有两个运算符可用于处理指针：
+● & 运算符使用其后对象的地址。
+● * 运算符取消引用指针。 也就是说，你可以前往指针中包含的地址访问其中的对象。
 
 ```go
 func updateName(name *string) {
@@ -321,6 +365,7 @@ func main() {
     fmt.Println(firstName) // David
 }
 ```
+首先要做的就是修改函数的签名，以指明你要接收指针。 为此，请将参数类型从 string 更改为 *string。 （后者仍是字符串，但现在它是指向字符串 的 指针。）然后，将新值分配给该变量时，需要在该变量的左侧添加星号 (*) 以暂停该变量的值。 调用 updateName 函数时，系统不会发送值，而是发送变量的内存地址。 这就是前面的代码在变量左侧带有 & 符号的原因。
 
 - `&` 取变量地址；`*` 解引用（访问指针指向的值）
 
@@ -384,6 +429,11 @@ func main() {
 | `%p` | 指针地址 |
 
 ### 宽度与精度
+● 可以在动词前指定宽度和精度，例如：
+  ○ %5d：输出整数，宽度为5，右对齐。
+  ○ %-5d：输出整数，宽度为5，左对齐。
+  ○ %5.2f：输出浮点数，宽度为5，精度为2（即小数点后两位）。
+  ○ %05d：输出整数，宽度为5，不足部分用0填充。
 
 ```go
 fmt.Printf("|%5d|\n", 123)     // |  123| 右对齐宽度 5
@@ -404,6 +454,56 @@ p := Person{Name: "Bob", Age: 30}
 fmt.Printf("%v\n", p)   // {Bob 30}
 fmt.Printf("%+v\n", p)  // {Name:Bob Age:30}
 fmt.Printf("%#v\n", p)  // main.Person{Name:"Bob", Age:30}
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+    // 通用动词
+    fmt.Printf("%v\n", "Hello")  // Hello
+    fmt.Printf("%+v\n", struct{ Name string }{Name: "Alice"}) // {Name:Alice}
+    // struct { Name string }{Name:"Alice"}
+    fmt.Printf("%#v\n", struct{ Name string }{Name: "Alice"}) 
+    fmt.Printf("%T\n", "Hello") // string
+
+    // 整数
+    fmt.Printf("%d\n", 65)      // 65
+    fmt.Printf("%b\n", 65)      // 1000001
+    fmt.Printf("%o\n", 65)      // 101
+    fmt.Printf("%x\n", 65)      // 41
+    fmt.Printf("%X\n", 65)      // 41
+    fmt.Printf("%c\n", 65)      // A
+    fmt.Printf("%U\n", 'A')     // U+0041
+
+    // 浮点数
+    fmt.Printf("%f\n", 3.1415926535) // 3.141593
+    fmt.Printf("%e\n", 3.1415926535) // 3.141593e+00
+    fmt.Printf("%E\n", 3.1415926535) // 3.141593E+00
+    fmt.Printf("%g\n", 3.1415926535) // 3.1415926535
+    fmt.Printf("%G\n", 3.1415926535) // 3.1415926535
+
+    // 字符串
+    fmt.Printf("%s\n", "Hello") // Hello
+    fmt.Printf("%q\n", "Hello") // "Hello"
+    fmt.Printf("%x\n", "Hello") // 48656c6c6f
+    fmt.Printf("%X\n", "Hello") // 48656C6C6F
+
+    // 布尔值
+    fmt.Printf("%t\n", true)    // true
+
+    // 指针
+    x := 42
+    fmt.Printf("%p\n", &x)      // 0x...（地址）
+
+    // 宽度和精度
+    fmt.Printf("|%5d|\n", 123)    // |  123|
+    fmt.Printf("|%-5d|\n", 123)   // |123  |
+    fmt.Printf("|%05d|\n", 123)   // |00123|
+    fmt.Printf("|%5.2f|\n", 3.1415926535) // | 3.14|
+}
+
 ```
 
 ## 七、包与可见性
