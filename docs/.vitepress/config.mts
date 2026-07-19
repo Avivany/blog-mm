@@ -18,6 +18,10 @@ export default defineConfig({
   description: "这里留下的独特痕迹，见证了你我独有的故事.",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    outline: {
+      level: [2, 4],
+      label: '当前目录'
+    },
     logo:`/logo.png`,
     nav:[
       {text: '导航', link: '/website/index'},
