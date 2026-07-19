@@ -48,6 +48,7 @@ export default defineConfig({
             'items':[
               {'text':'程序结构与函数','link':'/webs/go/go_syntax'},
               {'text':'基础数据类型','link':'/webs/go/go_basic_types'},
+              {'text':'操作符与运算符','link':'/webs/go/go_operators'},
               {'text':'控制流','link':'/webs/go/go_control_flow'},
               {'text':'复合数据类型','link':'/webs/go/go_composite'},
               {'text':'并发编程','link':'/webs/go/go_concurrency'},
